@@ -1,0 +1,109 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 65536 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2798), pid=12613, tid=0x00007f33b74c4700
+#
+# JRE version: OpenJDK Runtime Environment (8.0_262-b10) (build 1.8.0_262-b10)
+# Java VM: OpenJDK 64-Bit Server VM (25.262-b10 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f33c8117000):  JavaThread "C1 CompilerThread1" daemon [_thread_in_vm, id=12631, stack(0x00007f33b73c5000,0x00007f33b74c5000)]
+
+Stack: [0x00007f33b73c5000,0x00007f33b74c5000],  sp=0x00007f33b74c2fb0,  free space=1015k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xb5718d]  VMError::report_and_die()+0x15d
+V  [libjvm.so+0x50675a]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*)+0xaa
+V  [libjvm.so+0x93d3f8]  os::pd_commit_memory(char*, unsigned long, unsigned long, bool)+0xd8
+V  [libjvm.so+0x93457e]  os::commit_memory(char*, unsigned long, unsigned long, bool)+0x2e
+V  [libjvm.so+0xb53d94]  VirtualSpace::expand_by(unsigned long, bool)+0x1b4
+V  [libjvm.so+0x61d15c]  CodeHeap::expand_by(unsigned long)+0x6c
+V  [libjvm.so+0x48e0e6]  CodeCache::allocate(int, bool)+0x46
+V  [libjvm.so+0x8fdcd7]  nmethod::new_nmethod(methodHandle, int, int, CodeOffsets*, int, DebugInformationRecorder*, Dependencies*, CodeBuffer*, int, OopMapSet*, ExceptionHandlerTable*, ImplicitExceptionTable*, AbstractCompiler*, int)+0x1a7
+V  [libjvm.so+0x42b2a6]  ciEnv::register_method(ciMethod*, int, CodeOffsets*, int, CodeBuffer*, int, OopMapSet*, ExceptionHandlerTable*, ImplicitExceptionTable*, AbstractCompiler*, int, bool, bool, RTMState)+0x4d6
+V  [libjvm.so+0x36d0eb]  Compilation::compile_method()+0x21b
+V  [libjvm.so+0x36d442]  Compilation::Compilation(AbstractCompiler*, ciEnv*, ciMethod*, int, BufferBlob*)+0x252
+V  [libjvm.so+0x36e1b7]  Compiler::compile_method(ciEnv*, ciMethod*, int)+0xb7
+V  [libjvm.so+0x4b9cb2]  CompileBroker::invoke_compiler_on_method(CompileTask*)+0x8d2
+V  [libjvm.so+0x4ba980]  CompileBroker::compiler_thread_loop()+0x510
+V  [libjvm.so+0xafe902]  JavaThread::thread_main_inner()+0x212
+V  [libjvm.so+0x93a382]  java_start(Thread*)+0xf2
+C  [libpthread.so.0+0x7ea5]  start_thread+0xc5
+
+
+Current CompileTask:
+C1:1297963 1103       3       java.io.Writer::write (11 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f33c8875800 JavaThread "Forward input" [_thread_blocked, id=12643, stack(0x00007f33b582c000,0x00007f33b592d000)]
+  0x00007f33c8872000 JavaThread "DisconnectableInputStream source reader" daemon [_thread_in_native, id=12642, stack(0x00007f33b592d000,0x00007f33b5a2e000)]
+  0x00007f33c8775800 JavaThread "pool-1-thread-1" [_thread_blocked, id=12634, stack(0x00007f33b5e38000,0x00007f33b5f39000)]
+  0x00007f33c811a000 JavaThread "Service Thread" daemon [_thread_blocked, id=12632, stack(0x00007f33b72c3000,0x00007f33b73c4000)]
+=>0x00007f33c8117000 JavaThread "C1 CompilerThread1" daemon [_thread_in_vm, id=12631, stack(0x00007f33b73c5000,0x00007f33b74c5000)]
+  0x00007f33c810a800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=12630, stack(0x00007f33b74c6000,0x00007f33b75c6000)]
+  0x00007f33c8108000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=12629, stack(0x00007f33b75c6000,0x00007f33b76c7000)]
+  0x00007f33c80da800 JavaThread "Finalizer" daemon [_thread_blocked, id=12628, stack(0x00007f33b76c7000,0x00007f33b77c8000)]
+  0x00007f33c80d5800 JavaThread "Reference Handler" daemon [_thread_blocked, id=12627, stack(0x00007f33b77c8000,0x00007f33b78c9000)]
+  0x00007f33c804b800 JavaThread "main" [_thread_in_native, id=12625, stack(0x00007f33ce90d000,0x00007f33cea0d000)]
+
+Other Threads:
+  0x00007f33c80cc000 VMThread [stack: 0x00007f33b78ca000,0x00007f33b79ca000] [id=12626]
+  0x00007f33c811d800 WatcherThread [stack: 0x00007f33b71c3000,0x00007f33b72c3000] [id=12633]
+
+VM state:synchronizing (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007f33c8048030] CodeCache_lock - owner thread: 0x00007f33c8117000
+[0x00007f33c8048cb0] Threads_lock - owner thread: 0x00007f33c80cc000
+[0x00007f33c80491b0] Heap_lock - owner thread: 0x00007f33c8775800
+[0x00007f33c80496b0] Compile_lock - owner thread: 0x00007f33c8117000
+[0x00007f33c80497b0] MethodCompileQueue_lock - owner thread: 0x00007f33c8117000
+
+heap address: 0x00000000f0e00000, size: 242 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ def new generation   total 4928K, used 4927K [0x00000000f0e00000, 0x00000000f1350000, 0x00000000f5ea0000)
+  eden space 4416K, 100% used [0x00000000f0e00000, 0x00000000f1250000, 0x00000000f1250000)
+  from space 512K,  99% used [0x00000000f1250000, 0x00000000f12cfff8, 0x00000000f12d0000)
+  to   space 512K,   0% used [0x00000000f12d0000, 0x00000000f12d0000, 0x00000000f1350000)
+ tenured generation   total 10944K, used 3158K [0x00000000f5ea0000, 0x00000000f6950000, 0x0000000100000000)
+   the space 10944K,  28% used [0x00000000f5ea0000, 0x00000000f61b5948, 0x00000000f61b5a00, 0x00000000f6950000)
+ Metaspace       used 11186K, capacity 11528K, committed 11648K, reserved 1058816K
+  class space    used 1414K, capacity 1560K, committed 1664K, reserved 1048576K
+
+Card table byte_map: [0x00007f33ce849000,0x00007f33ce8c3000] byte_map_base: 0x00007f33ce0c2000
+
+Polling page: 0x00007f33cea19000
+
+CodeCache: size=245760Kb used=3510Kb max_used=3510Kb free=242249Kb
+ bounds [0x00007f33b87a9000, 0x00007f33b8b19000, 0x00007f33c77a9000]
+ total_blobs=1410 nmethods=1064 adapters=258
+ compilation: enabled
+
+Compilation events (250 events):
+Event: 21.494 Thread 0x00007f33c8117000 nmethod 938 0x00007f33b8ac33d0 code [0x00007f33b8ac35c0, 0x00007f33b8ac3f28]
+Event: 21.646 Thread 0x00007f33c8117000  942       3       org.gradle.internal.logging.console.DefaultRedrawableLabel::setText (6 bytes)
